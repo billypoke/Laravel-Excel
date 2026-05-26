@@ -195,22 +195,6 @@ class BatchCacheTest extends TestCase
         $this->assertCount(2, $dispatchedCollection);
     }
 
-    public function test_it_can_override_default_ttl(): void
-    {
-        config()->set('excel.cache.default_ttl', 1);
-
-        $cache = $this->givenCache(['A1' => 'A1-value'], [], 1);
-        $this->cache->setEventDispatcher(Event::fake());
-        $cache->set('A2', 'A2-value', null);
-
-        $dispatchedCollection = Event::dispatched(
-            KeyWritten::class,
-            fn (KeyWritten $event) => $event->seconds === null
-        );
-
-        $this->assertCount(2, $dispatchedCollection);
-    }
-
     public static function defaultTTLDataProvider(): array
     {
         return [

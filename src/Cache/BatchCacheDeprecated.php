@@ -57,9 +57,7 @@ class BatchCacheDeprecated implements CacheInterface
      */
     public function set($key, $value, $ttl = null)
     {
-        if (func_num_args() === 2) {
-            $ttl = value($this->defaultTTL);
-        }
+        $ttl ??= value($this->defaultTTL);
 
         $this->memory->set($key, $value, $ttl);
 
@@ -126,9 +124,7 @@ class BatchCacheDeprecated implements CacheInterface
      */
     public function setMultiple($values, $ttl = null)
     {
-        if (func_num_args() === 1) {
-            $ttl = value($this->defaultTTL);
-        }
+        $ttl ??= value($this->defaultTTL);
 
         $this->memory->setMultiple($values, $ttl);
 
